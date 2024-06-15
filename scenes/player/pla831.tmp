@@ -1,0 +1,80 @@
+[gd_scene load_steps=11 format=3 uid="uid://bedjiti0h4ewa"]
+
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_0dg22"]
+[ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="2_uxpfn"]
+[ext_resource type="Script" path="res://scripts/state_machine/states/fall.gd" id="3_thxhf"]
+[ext_resource type="Script" path="res://scripts/state_machine/states/idle.gd" id="4_lim02"]
+[ext_resource type="Script" path="res://scripts/state_machine/states/jump.gd" id="5_rlihu"]
+[ext_resource type="Script" path="res://scripts/state_machine/states/move.gd" id="6_0o506"]
+[ext_resource type="Script" path="res://scripts/player/movement_component.gd" id="7_bf3iw"]
+[ext_resource type="Script" path="res://scripts/state_machine/state_debug_label.gd" id="8_vnb21"]
+[ext_resource type="Script" path="res://scripts/player/height_debug_label.gd" id="9_ee6ic"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ns8m"]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_0dg22")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_uxpfn")
+initial_state = NodePath("Idle")
+
+[node name="Fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "move_state", "jump_state")]
+script = ExtResource("3_thxhf")
+idle_state = NodePath("../Idle")
+move_state = NodePath("../Move")
+jump_state = NodePath("../Jump")
+early_fall_gravity = 1.7
+
+[node name="CoyoteTimer" type="Timer" parent="StateMachine/Fall"]
+wait_time = 0.15
+one_shot = true
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall_state", "jump_state", "move_state")]
+script = ExtResource("4_lim02")
+fall_state = NodePath("../Fall")
+jump_state = NodePath("../Jump")
+move_state = NodePath("../Move")
+
+[node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall_state", "idle_state", "move_state")]
+script = ExtResource("5_rlihu")
+fall_state = NodePath("../Fall")
+idle_state = NodePath("../Idle")
+move_state = NodePath("../Move")
+jump_height = 400.0
+
+[node name="Move" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "jump_state", "fall_state")]
+script = ExtResource("6_0o506")
+idle_state = NodePath("../Idle")
+jump_state = NodePath("../Jump")
+fall_state = NodePath("../Fall")
+move_speed = 400
+
+[node name="MovementComponent" type="Node2D" parent="."]
+script = ExtResource("7_bf3iw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3ns8m")
+
+[node name="ColorRect" type="ColorRect" parent="CollisionShape2D"]
+offset_left = -10.0
+offset_top = -11.0
+offset_right = 10.0
+offset_bottom = 10.0
+
+[node name="StateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
+offset_left = -45.0
+offset_top = -46.0
+offset_right = 82.0
+offset_bottom = -23.0
+text = "State:"
+script = ExtResource("8_vnb21")
+state_machine = NodePath("../StateMachine")
+
+[node name="HeightDebugLabel" type="Label" parent="."]
+offset_left = -46.0
+offset_top = -65.0
+offset_right = 81.0
+offset_bottom = -42.0
+text = "Height:"
+script = ExtResource("9_ee6ic")
