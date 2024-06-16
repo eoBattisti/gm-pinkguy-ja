@@ -1,11 +1,11 @@
-[gd_scene load_steps=10 format=4 uid="uid://bnlfmopx14ybt"]
+[gd_scene load_steps=11 format=4 uid="uid://bnlfmopx14ybt"]
 
 [ext_resource type="PackedScene" uid="uid://bedjiti0h4ewa" path="res://scenes/player/player.tscn" id="1_krry0"]
 [ext_resource type="Texture2D" uid="uid://dugc6r2bsdrbt" path="res://assets/sprites/world_tileset.png" id="2_e2i52"]
 [ext_resource type="PackedScene" uid="uid://uob0o451uac4" path="res://scenes/platforms/platform.tscn" id="3_aaw4k"]
 [ext_resource type="PackedScene" uid="uid://dlxm7a630a6tx" path="res://scenes/killzone/killzone.tscn" id="4_rjcdn"]
 [ext_resource type="Texture2D" uid="uid://dyy6usdf8saqo" path="res://assets/sprites/spikes.png" id="5_robbg"]
-[ext_resource type="PackedScene" uid="uid://eq7h15pphq68" path="res://scenes/enemies/enemy.tscn" id="6_buibi"]
+[ext_resource type="PackedScene" uid="uid://eq7h15pphq68" path="res://scenes/enemies/spider.tscn" id="6_buibi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nhuht"]
 texture = ExtResource("2_e2i52")
@@ -28,7 +28,10 @@ sources/0 = SubResource("TileSetAtlasSource_nhuht")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dmruc"]
 size = Vector2(17, 4)
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5y1j6"]
+size = Vector2(14, 9)
+
+[node name="Game" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_krry0")]
 position = Vector2(187, 148)
@@ -52,5 +55,14 @@ texture = ExtResource("5_robbg")
 position = Vector2(-0.5, 6)
 shape = SubResource("RectangleShape2D_dmruc")
 
-[node name="Enemy" parent="." instance=ExtResource("6_buibi")]
-position = Vector2(273, 424)
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Spider" parent="Enemies" instance=ExtResource("6_buibi")]
+position = Vector2(268, 425)
+metadata/_edit_group_ = true
+
+[node name="Killzone" parent="Enemies/Spider" instance=ExtResource("4_rjcdn")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/Spider/Killzone"]
+position = Vector2(1, -0.5)
+shape = SubResource("RectangleShape2D_5y1j6")

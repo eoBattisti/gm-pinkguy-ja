@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://eq7h15pphq68"]
+
+[ext_resource type="Script" path="res://scripts/enemy/enemy.gd" id="1_fcrx7"]
+[ext_resource type="Texture2D" uid="uid://co6is3rjtg0rk" path="res://assets/sprites/spider.png" id="1_gihtt"]
+[ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="3_6c1b8"]
+[ext_resource type="Script" path="res://scripts/state_machine/enemy_states/move.gd" id="4_0eend"]
+[ext_resource type="Script" path="res://scripts/components/enemy/movement_component.gd" id="5_jqww4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xlkfl"]
+size = Vector2(14, 9)
+
+[node name="Spider" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource("1_fcrx7")
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(7, 0)
+target_position = Vector2(27, 0)
+collision_mask = 2
+
+[node name="RayCastDownRight" type="RayCast2D" parent="."]
+position = Vector2(9, 1)
+target_position = Vector2(0, 9)
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(-5, 0)
+rotation = 3.14159
+target_position = Vector2(27, 0)
+collision_mask = 2
+
+[node name="RayCastDownLeft" type="RayCast2D" parent="."]
+position = Vector2(-7, 1)
+target_position = Vector2(0, 9)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_gihtt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -0.5)
+shape = SubResource("RectangleShape2D_xlkfl")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_6c1b8")
+initial_state = NodePath("Move")
+
+[node name="Move" type="Node" parent="StateMachine"]
+script = ExtResource("4_0eend")
+
+[node name="MovementComponent" type="Node" parent="." node_paths=PackedStringArray("raycast_right", "raycast_down_right", "raycast_left", "raycast_down_left")]
+script = ExtResource("5_jqww4")
+raycast_right = NodePath("../RayCastRight")
+raycast_down_right = NodePath("../RayCastDownRight")
+raycast_left = NodePath("../RayCastLeft")
+raycast_down_left = NodePath("../RayCastDownLeft")

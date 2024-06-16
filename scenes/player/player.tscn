@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_0dg22"]
 [ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="2_uxpfn"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/fall.gd" id="3_thxhf"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/idle.gd" id="4_lim02"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/jump.gd" id="5_rlihu"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/move.gd" id="6_0o506"]
-[ext_resource type="Script" path="res://scripts/player/movement_component.gd" id="7_bf3iw"]
+[ext_resource type="Script" path="res://scripts/state_machine/player_states/fall.gd" id="3_thxhf"]
+[ext_resource type="Script" path="res://scripts/state_machine/player_states/idle.gd" id="4_lim02"]
+[ext_resource type="Script" path="res://scripts/state_machine/player_states/jump.gd" id="5_rlihu"]
+[ext_resource type="Script" path="res://scripts/state_machine/player_states/move.gd" id="6_0o506"]
+[ext_resource type="Script" path="res://scripts/components/player/movement_component.gd" id="7_bf3iw"]
 [ext_resource type="Script" path="res://scripts/state_machine/state_debug_label.gd" id="8_vnb21"]
 [ext_resource type="Script" path="res://scripts/player/height_debug_label.gd" id="9_ee6ic"]
 
