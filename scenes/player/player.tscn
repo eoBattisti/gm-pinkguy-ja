@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bedjiti0h4ewa"]
+[gd_scene load_steps=12 format=3 uid="uid://bedjiti0h4ewa"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_0dg22"]
 [ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="2_uxpfn"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/components/player/movement_component.gd" id="7_bf3iw"]
 [ext_resource type="Script" path="res://scripts/state_machine/state_debug_label.gd" id="8_vnb21"]
 [ext_resource type="Script" path="res://scripts/player/height_debug_label.gd" id="9_ee6ic"]
+[ext_resource type="PackedScene" uid="uid://co50r8ouqttp5" path="res://scenes/weapons/pistol.tscn" id="10_ilyql"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ns8m"]
 
@@ -81,3 +82,5 @@ offset_bottom = -42.0
 text = "Height:"
 script = ExtResource("9_ee6ic")
 player = NodePath("..")
+
+[node name="Weapon" parent="." instance=ExtResource("10_ilyql")]
