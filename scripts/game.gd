@@ -7,6 +7,7 @@ extends Node2D
 var paused: bool = false
 
 func _ready() -> void:
+	GameManager.start_game()
 	MusicManager.set_new_stream(MusicManager.MusicType.INGAME)
 
 
