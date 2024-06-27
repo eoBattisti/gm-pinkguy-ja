@@ -18,9 +18,11 @@ func _unhandled_input(event: InputEvent) -> void:
 func pause_game() -> void:
 	if paused:
 		pause_menu.hide()
+		MusicManager.set_new_stream(MusicManager.MusicType.INGAME)
 		Engine.time_scale = 1
 	else:
 		pause_menu.show()
+		MusicManager.set_new_stream(MusicManager.MusicType.MENU)
 		Engine.time_scale = 0
 	
 	paused = !paused
