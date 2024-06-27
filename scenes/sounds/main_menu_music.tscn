@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cnvyy5aykg75s"]
-
-[ext_resource type="AudioStream" uid="uid://idnagf46yjs3" path="res://assets/sounds/musics/8bit Bossa.mp3" id="1_14mbo"]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
-stream = ExtResource("1_14mbo")
-autoplay = true
-bus = &"music"

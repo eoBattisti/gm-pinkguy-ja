@@ -1,6 +1,8 @@
-[gd_scene load_steps=11 format=4 uid="uid://bnlfmopx14ybt"]
+[gd_scene load_steps=13 format=4 uid="uid://bnlfmopx14ybt"]
 
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_koafi"]
 [ext_resource type="PackedScene" uid="uid://bedjiti0h4ewa" path="res://scenes/player/player.tscn" id="1_krry0"]
+[ext_resource type="AudioStream" uid="uid://18awjh172ro5" path="res://assets/sounds/musics/leap.WAV" id="2_8nkn2"]
 [ext_resource type="Texture2D" uid="uid://dugc6r2bsdrbt" path="res://assets/sprites/world_tileset.png" id="2_e2i52"]
 [ext_resource type="PackedScene" uid="uid://uob0o451uac4" path="res://scenes/platforms/platform.tscn" id="3_aaw4k"]
 [ext_resource type="PackedScene" uid="uid://dlxm7a630a6tx" path="res://scenes/killzone/killzone.tscn" id="4_rjcdn"]
@@ -32,6 +34,8 @@ size = Vector2(17, 4)
 size = Vector2(14, 9)
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_koafi")
+in_game_music = ExtResource("2_8nkn2")
 
 [node name="Player" parent="." instance=ExtResource("1_krry0")]
 position = Vector2(187, 148)
