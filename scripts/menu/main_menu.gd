@@ -5,6 +5,7 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	start_button.grab_focus()
+	MusicManager.set_new_stream(MusicManager.MusicType.MENU)
 
 
 func _on_start_button_pressed() -> void:

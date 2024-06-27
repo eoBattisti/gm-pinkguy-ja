@@ -15,7 +15,8 @@ enum MusicType { MENU, INGAME }
 func _ready() -> void:
 
 	# Starts the Geral AudioPlayer
-	audio_player.stream = musics[MusicType.MENU]
+	current_stream = MusicType.MENU
+	audio_player.stream = musics[current_stream]
 	audio_player.play()
 
 
@@ -24,11 +25,10 @@ func change_volume(value: float) -> void:
 
 
 func set_new_stream(new: MusicType) -> void:
-	var tween = create_tween().bind_node(audio_player)
-	tween.tween_method(change_volume, audio_player.volume_db, 0, transition_duration).set_delay(transition_delay)
-	await tween.finished
+
 	if current_stream != new:
+		audio_player.stop()
 		audio_player.stream = musics[new]
 		current_stream = new
-		audio_player.play()
 		change_volume(1)
+		audio_player.play()

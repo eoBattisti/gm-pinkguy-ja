@@ -2,11 +2,11 @@
 
 [ext_resource type="AudioStream" uid="uid://idnagf46yjs3" path="res://assets/sounds/musics/8bit Bossa.mp3" id="1_14mbo"]
 [ext_resource type="Script" path="res://scripts/singletons/music_manager.gd" id="2_vdry4"]
-[ext_resource type="AudioStream" uid="uid://18awjh172ro5" path="res://assets/sounds/musics/leap.WAV" id="3_k5man"]
+[ext_resource type="AudioStream" uid="uid://c77ymq0fy2ikx" path="res://assets/sounds/musics/leap.mp3" id="3_uf24t"]
 
 [node name="MusicManager" type="Node2D"]
 script = ExtResource("2_vdry4")
-musics = Array[AudioStream]([ExtResource("1_14mbo"), ExtResource("3_k5man")])
+musics = Array[AudioStream]([ExtResource("1_14mbo"), ExtResource("3_uf24t")])
 
 [node name="InGamePlayer" type="AudioStreamPlayer" parent="."]
 autoplay = true
