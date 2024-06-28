@@ -35,6 +35,7 @@ func process_physics(delta: float) -> State:
 	
 	var movement = movement_component.get_move_direction() * move_state.move_speed
 
+	animations.flip_h = movement < 0
 	parent.velocity.x = movement
 	parent.move_and_slide()
 

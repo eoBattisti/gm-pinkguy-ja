@@ -3,9 +3,10 @@ class_name Enemy
 
 @onready var state_machine: StateMachine = $StateMachine
 @onready var movement_component: Node = $MovementComponent
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 func _ready() -> void:
-	state_machine.init(self, movement_component)
+	state_machine.init(self, animated_sprite_2d, movement_component)
 
 func _unhandled_input(event: InputEvent) -> void:
 	state_machine.process_input(event)

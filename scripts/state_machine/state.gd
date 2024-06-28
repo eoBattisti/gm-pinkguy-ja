@@ -6,7 +6,7 @@ class_name State
 
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-#var animations: AnimatedSprite2D
+var animations: AnimatedSprite2D
 var parent: CharacterBody2D
 #var audio_player: AudioStreamPlayer
 var movement_component
@@ -14,7 +14,7 @@ var movement_component
 
 func enter() -> void:
 	pass
-	#animations.play(animation_name)
+	animations.play(animation_name)
 	#audio_player.stream = sound_effect_resource
 	#audio_player.play()
 

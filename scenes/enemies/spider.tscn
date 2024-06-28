@@ -1,11 +1,47 @@
-[gd_scene load_steps=8 format=3 uid="uid://eq7h15pphq68"]
+[gd_scene load_steps=13 format=3 uid="uid://eq7h15pphq68"]
 
 [ext_resource type="Script" path="res://scripts/enemy/enemy.gd" id="1_fcrx7"]
-[ext_resource type="Texture2D" uid="uid://co6is3rjtg0rk" path="res://assets/sprites/spider.png" id="1_gihtt"]
+[ext_resource type="Texture2D" uid="uid://c2x1l7nn0ngtf" path="res://assets/sprites/Enemies.png" id="2_pwek1"]
 [ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="3_6c1b8"]
 [ext_resource type="Script" path="res://scripts/state_machine/enemy_states/move.gd" id="4_0eend"]
 [ext_resource type="Script" path="res://scripts/components/enemy/movement_component.gd" id="5_jqww4"]
 [ext_resource type="PackedScene" uid="uid://ewtn15f1rtqa" path="res://scenes/components/health_component.tscn" id="6_0vwjc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4dgh"]
+atlas = ExtResource("2_pwek1")
+region = Rect2(48, 192, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p0u7x"]
+atlas = ExtResource("2_pwek1")
+region = Rect2(64, 192, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3wms"]
+atlas = ExtResource("2_pwek1")
+region = Rect2(80, 192, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j38vl"]
+atlas = ExtResource("2_pwek1")
+region = Rect2(96, 192, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k0okg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j4dgh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p0u7x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3wms")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j38vl")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xlkfl"]
 size = Vector2(14, 9)
@@ -14,6 +50,12 @@ size = Vector2(14, 9)
 collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_fcrx7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -4)
+sprite_frames = SubResource("SpriteFrames_k0okg")
+animation = &"move"
+autoplay = "move"
 
 [node name="RayCastRight" type="RayCast2D" parent="."]
 position = Vector2(7, 0)
@@ -34,9 +76,6 @@ collision_mask = 2
 position = Vector2(-7, 1)
 target_position = Vector2(0, 9)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_gihtt")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, -0.5)
 shape = SubResource("RectangleShape2D_xlkfl")
@@ -47,6 +86,7 @@ initial_state = NodePath("Move")
 
 [node name="Move" type="Node" parent="StateMachine"]
 script = ExtResource("4_0eend")
+animation_name = "move"
 
 [node name="MovementComponent" type="Node" parent="." node_paths=PackedStringArray("raycast_right", "raycast_down_right", "raycast_left", "raycast_down_left")]
 script = ExtResource("5_jqww4")

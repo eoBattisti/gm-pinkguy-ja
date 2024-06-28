@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://bedjiti0h4ewa"]
+[gd_scene load_steps=23 format=3 uid="uid://bedjiti0h4ewa"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_0dg22"]
 [ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="2_uxpfn"]
+[ext_resource type="Texture2D" uid="uid://b83st155h1sp6" path="res://assets/sprites/Player.png" id="2_xgsse"]
 [ext_resource type="Script" path="res://scripts/state_machine/player_states/fall.gd" id="3_thxhf"]
 [ext_resource type="Script" path="res://scripts/state_machine/player_states/idle.gd" id="4_lim02"]
 [ext_resource type="Script" path="res://scripts/state_machine/player_states/jump.gd" id="5_rlihu"]
@@ -12,11 +13,107 @@
 [ext_resource type="PackedScene" uid="uid://co50r8ouqttp5" path="res://scenes/weapons/pistol.tscn" id="10_ilyql"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ns8m"]
+size = Vector2(9, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hc6to"]
+atlas = ExtResource("2_xgsse")
+region = Rect2(16, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sd47s"]
+atlas = ExtResource("2_xgsse")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2rhjg"]
+atlas = ExtResource("2_xgsse")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ijcq"]
+atlas = ExtResource("2_xgsse")
+region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dxp2y"]
+atlas = ExtResource("2_xgsse")
+region = Rect2(16, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_575sj"]
+atlas = ExtResource("2_xgsse")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ft33"]
+atlas = ExtResource("2_xgsse")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ox7rr"]
+atlas = ExtResource("2_xgsse")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qr1le"]
+atlas = ExtResource("2_xgsse")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uf0c5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hc6to")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sd47s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2rhjg")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ijcq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dxp2y")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_575sj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ft33")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ox7rr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qr1le")
+}],
+"loop": true,
+"name": &"move",
+"speed": 4.0
+}]
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_0dg22")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 1)
+shape = SubResource("RectangleShape2D_3ns8m")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_uf0c5")
+animation = &"idle"
+autoplay = "idle"
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_uxpfn")
@@ -28,6 +125,7 @@ idle_state = NodePath("../Idle")
 move_state = NodePath("../Move")
 jump_state = NodePath("../Jump")
 early_fall_gravity = 1.7
+animation_name = "fall"
 
 [node name="CoyoteTimer" type="Timer" parent="StateMachine/Fall"]
 wait_time = 0.15
@@ -38,6 +136,7 @@ script = ExtResource("4_lim02")
 fall_state = NodePath("../Fall")
 jump_state = NodePath("../Jump")
 move_state = NodePath("../Move")
+animation_name = "idle"
 
 [node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall_state", "idle_state", "move_state")]
 script = ExtResource("5_rlihu")
@@ -45,25 +144,18 @@ fall_state = NodePath("../Fall")
 idle_state = NodePath("../Idle")
 move_state = NodePath("../Move")
 jump_height = 150.0
+animation_name = "jump"
 
 [node name="Move" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "jump_state", "fall_state")]
 script = ExtResource("6_0o506")
 idle_state = NodePath("../Idle")
 jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
-move_speed = 400
+move_speed = 100
+animation_name = "move"
 
 [node name="MovementComponent" type="Node2D" parent="."]
 script = ExtResource("7_bf3iw")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_3ns8m")
-
-[node name="ColorRect" type="ColorRect" parent="CollisionShape2D"]
-offset_left = -10.0
-offset_top = -11.0
-offset_right = 10.0
-offset_bottom = 10.0
 
 [node name="StateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 offset_left = -45.0
@@ -84,4 +176,5 @@ script = ExtResource("9_ee6ic")
 player = NodePath("..")
 
 [node name="Weapon" parent="." node_paths=PackedStringArray("ammo_component") instance=ExtResource("10_ilyql")]
+visible = false
 ammo_component = NodePath("AmmoComponent")

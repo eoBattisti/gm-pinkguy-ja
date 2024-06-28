@@ -16,7 +16,12 @@ func process_physics(delta: float) -> State:
 
 	var movement = direction * move_speed
 
-	#animations.flip_h = movement < 0
+	animations.flip_h = movement < 05
 	parent.velocity.x = movement
 	parent.move_and_slide()
+	return null
+
+func process_frame(delta: float) -> State:
+	if direction:
+		pass
 	return null
