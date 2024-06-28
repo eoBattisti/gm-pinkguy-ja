@@ -1,12 +1,16 @@
 extends Node2D
 
 const BULLET: PackedScene = preload("res://scenes/shooting/bullet.tscn")
+@onready var state_machine: Node = $StateMachine
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _ready() -> void:
+	state_machine.init(self, null)
+
 func _process(delta: float) -> void:
 	look_at(get_global_mouse_position())
 
 func _unhandled_input(event: InputEvent) -> void:
+
 	if event.is_action_pressed("ui_accept"):
 		var b = BULLET.instantiate()
 		b.global_position = global_position + Vector2(0, 0.5)

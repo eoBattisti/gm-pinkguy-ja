@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://co50r8ouqttp5"]
+[gd_scene load_steps=7 format=3 uid="uid://co50r8ouqttp5"]
 
 [ext_resource type="Script" path="res://scripts/weapons/pistol.gd" id="1_a606n"]
 [ext_resource type="Texture2D" uid="uid://ct0c5xecrfoy3" path="res://assets/sprites/16x16_Weapons.png" id="1_ga3kd"]
+[ext_resource type="Script" path="res://scripts/state_machine/weapon_states/idle.gd" id="3_dh0pd"]
+[ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="3_gnyef"]
+[ext_resource type="Script" path="res://scripts/state_machine/weapon_states/reload.gd" id="4_hexnp"]
+[ext_resource type="Script" path="res://scripts/state_machine/weapon_states/shooting.gd" id="5_igf0t"]
 
 [node name="Pistol" type="Node2D"]
 script = ExtResource("1_a606n")
@@ -11,3 +15,21 @@ texture = ExtResource("1_ga3kd")
 hframes = 12
 vframes = 4
 frame = 20
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_gnyef")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("reload_state", "shooting_state")]
+script = ExtResource("3_dh0pd")
+reload_state = NodePath("../Reload")
+shooting_state = NodePath("../Shooting")
+
+[node name="Reload" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
+script = ExtResource("4_hexnp")
+idle_state = NodePath("../Idle")
+
+[node name="Shooting" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "reload_state")]
+script = ExtResource("5_igf0t")
+idle_state = NodePath("../Idle")
+reload_state = NodePath("../Reload")
