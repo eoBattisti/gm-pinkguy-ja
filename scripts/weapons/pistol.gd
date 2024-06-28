@@ -9,6 +9,7 @@ func _process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		var b = BULLET.instantiate()
-		add_child(b)
 		b.global_position = global_position + Vector2(0, 0.5)
+		get_tree().get_root().add_child(b)
+		
 		
