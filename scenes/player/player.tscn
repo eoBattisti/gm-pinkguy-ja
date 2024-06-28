@@ -83,4 +83,5 @@ text = "Height:"
 script = ExtResource("9_ee6ic")
 player = NodePath("..")
 
-[node name="Weapon" parent="." instance=ExtResource("10_ilyql")]
+[node name="Weapon" parent="." node_paths=PackedStringArray("ammo_component") instance=ExtResource("10_ilyql")]
+ammo_component = NodePath("AmmoComponent")

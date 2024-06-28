@@ -1,15 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://eq7h15pphq68"]
+[gd_scene load_steps=8 format=3 uid="uid://eq7h15pphq68"]
 
 [ext_resource type="Script" path="res://scripts/enemy/enemy.gd" id="1_fcrx7"]
 [ext_resource type="Texture2D" uid="uid://co6is3rjtg0rk" path="res://assets/sprites/spider.png" id="1_gihtt"]
 [ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="3_6c1b8"]
 [ext_resource type="Script" path="res://scripts/state_machine/enemy_states/move.gd" id="4_0eend"]
 [ext_resource type="Script" path="res://scripts/components/enemy/movement_component.gd" id="5_jqww4"]
+[ext_resource type="PackedScene" uid="uid://ewtn15f1rtqa" path="res://scenes/components/health_component.tscn" id="6_0vwjc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xlkfl"]
 size = Vector2(14, 9)
 
-[node name="Spider" type="CharacterBody2D"]
+[node name="Spider" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_fcrx7")
@@ -53,3 +54,6 @@ raycast_right = NodePath("../RayCastRight")
 raycast_down_right = NodePath("../RayCastDownRight")
 raycast_left = NodePath("../RayCastLeft")
 raycast_down_left = NodePath("../RayCastDownLeft")
+
+[node name="HealthComponent" parent="." instance=ExtResource("6_0vwjc")]
+MAX_HEALTH = 1.0

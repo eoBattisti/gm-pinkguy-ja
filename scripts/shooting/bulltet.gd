@@ -3,6 +3,8 @@ class_name Bullet
 
 @export var speed = 750
 
+@onready var damage_component: DamageComponent = $DamageComponent
+
 var direction: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
@@ -18,5 +20,5 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemies"):
-		body.queue_free()
+		damage_component.damage(body)
 	queue_free()

@@ -1,6 +1,6 @@
 extends Node2D
 
-const BULLET: PackedScene = preload("res://scenes/shooting/bullet.tscn")
+@export var BULLET: PackedScene = preload("res://scenes/shooting/bullet.tscn")
 
 @export var ammo_component: AmmoComponent
 @export var reloading_time: float = 1.0
