@@ -24,6 +24,7 @@ MusicManager="*res://scenes/sounds/music_manager.tscn"
 
 window/size/viewport_width=400
 window/size/viewport_height=500
+window/size/mode=2
 window/stretch/mode="viewport"
 window/handheld/orientation=1
 

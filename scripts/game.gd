@@ -3,6 +3,7 @@ extends Node2D
 @export var in_game_music: AudioStream
 
 @onready var pause_menu: Control = %PauseMenu
+@onready var player: Player = $Player
 
 var paused: bool = false
 
@@ -10,6 +11,8 @@ func _ready() -> void:
 	GameManager.start_game()
 	MusicManager.set_new_stream(MusicManager.MusicType.INGAME)
 
+func _process(_delta: float) -> void:
+	GameManager.set_height(player.global_position.y)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://co50r8ouqttp5"]
 
 [ext_resource type="Script" path="res://scripts/weapons/pistol.gd" id="1_a606n"]
-[ext_resource type="Texture2D" uid="uid://ct0c5xecrfoy3" path="res://assets/sprites/16x16_Weapons.png" id="1_ga3kd"]
+[ext_resource type="Texture2D" uid="uid://ctjxy6p8gegrn" path="res://assets/sprites/weapon.png" id="2_gkvrk"]
 [ext_resource type="PackedScene" uid="uid://plbukpx4xsy3" path="res://scenes/components/ammo_component.tscn" id="3_hl04c"]
 
 [node name="Pistol" type="Node2D" node_paths=PackedStringArray("ammo_component")]
@@ -9,9 +9,6 @@ script = ExtResource("1_a606n")
 ammo_component = NodePath("AmmoComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_ga3kd")
-hframes = 12
-vframes = 4
-frame = 20
+texture = ExtResource("2_gkvrk")
 
 [node name="AmmoComponent" parent="." instance=ExtResource("3_hl04c")]

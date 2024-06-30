@@ -4,12 +4,19 @@ extends Node2D
 
 @export var ammo_component: AmmoComponent
 @export var reloading_time: float = 1.0
+@export var fire_rate: float = 0.3
 
 var is_reloading: bool = false
+var can_fire: bool = true
 
 func _process(delta: float) -> void:
 	look_at(get_global_mouse_position())
-
+	
+	if Input.is_action_pressed("shoot") and !is_reloading and can_fire:
+		shoot()
+		can_fire = false
+		await get_tree().create_timer(fire_rate).timeout
+		can_fire = true
 
 func _unhandled_input(event: InputEvent) -> void:
 
@@ -18,10 +25,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		await get_tree().create_timer(reloading_time).timeout
 		ammo_component.reload()
 		is_reloading = false
-
-	if event.is_action_pressed("shoot") and !is_reloading:
-		shoot()
-
 
 func shoot() -> void:
 	if ammo_component.current_ammo > 0:

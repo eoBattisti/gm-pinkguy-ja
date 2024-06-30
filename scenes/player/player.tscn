@@ -102,6 +102,7 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_0dg22")
@@ -176,5 +177,5 @@ script = ExtResource("9_ee6ic")
 player = NodePath("..")
 
 [node name="Weapon" parent="." node_paths=PackedStringArray("ammo_component") instance=ExtResource("10_ilyql")]
-visible = false
+position = Vector2(1, 2)
 ammo_component = NodePath("AmmoComponent")
