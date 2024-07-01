@@ -13,7 +13,6 @@ func _ready() -> void:
 	if movable:
 		_start_tween()
 
-
 func _start_tween() -> void:
 	var tween = get_tree().create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	tween.set_loops().set_parallel(false)

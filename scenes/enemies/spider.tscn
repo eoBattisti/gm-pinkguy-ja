@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://eq7h15pphq68"]
+[gd_scene load_steps=15 format=3 uid="uid://eq7h15pphq68"]
 
 [ext_resource type="Script" path="res://scripts/enemy/enemy.gd" id="1_fcrx7"]
 [ext_resource type="Texture2D" uid="uid://c2x1l7nn0ngtf" path="res://assets/sprites/Enemies.png" id="2_pwek1"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://scripts/state_machine/enemy_states/move.gd" id="4_0eend"]
 [ext_resource type="Script" path="res://scripts/components/enemy/movement_component.gd" id="5_jqww4"]
 [ext_resource type="PackedScene" uid="uid://ewtn15f1rtqa" path="res://scenes/components/health_component.tscn" id="6_0vwjc"]
+[ext_resource type="PackedScene" uid="uid://cpvmilfq8egwi" path="res://scenes/components/healthbar_component.tscn" id="7_i67lo"]
+[ext_resource type="Texture2D" uid="uid://bk70ui2pvb6v4" path="res://assets/sprites/heart.png" id="8_w4oep"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j4dgh"]
 atlas = ExtResource("2_pwek1")
@@ -95,5 +97,9 @@ raycast_down_right = NodePath("../RayCastDownRight")
 raycast_left = NodePath("../RayCastLeft")
 raycast_down_left = NodePath("../RayCastDownLeft")
 
-[node name="HealthComponent" parent="." instance=ExtResource("6_0vwjc")]
-MAX_HEALTH = 1.0
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("healthbar") instance=ExtResource("6_0vwjc")]
+MAX_HEALTH = 3.0
+healthbar = NodePath("../HealthbarComponent")
+
+[node name="HealthbarComponent" parent="." instance=ExtResource("7_i67lo")]
+texture = ExtResource("8_w4oep")

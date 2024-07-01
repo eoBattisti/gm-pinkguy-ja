@@ -7,6 +7,8 @@ class_name MoveState
 
 @export var move_speed: int
 
+@onready var screen_size = DisplayServer.window_get_size()
+
 func enter() -> void:
 	super()
 

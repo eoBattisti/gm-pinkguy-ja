@@ -6,7 +6,7 @@ class_name Enemy
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 func _ready() -> void:
-	state_machine.init(self, animated_sprite_2d, movement_component)
+	state_machine.init(self, animated_sprite_2d, null, movement_component)
 
 func _unhandled_input(event: InputEvent) -> void:
 	state_machine.process_input(event)

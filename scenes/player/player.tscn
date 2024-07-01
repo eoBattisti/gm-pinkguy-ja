@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bedjiti0h4ewa"]
+[gd_scene load_steps=28 format=3 uid="uid://bedjiti0h4ewa"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_0dg22"]
 [ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="2_uxpfn"]
@@ -7,13 +7,18 @@
 [ext_resource type="Script" path="res://scripts/state_machine/player_states/idle.gd" id="4_lim02"]
 [ext_resource type="Script" path="res://scripts/state_machine/player_states/jump.gd" id="5_rlihu"]
 [ext_resource type="Script" path="res://scripts/state_machine/player_states/move.gd" id="6_0o506"]
+[ext_resource type="AudioStream" uid="uid://6le1yoaoobey" path="res://assets/sounds/sfx/sfx_movement_jump9.wav" id="7_6h7hf"]
 [ext_resource type="Script" path="res://scripts/components/player/movement_component.gd" id="7_bf3iw"]
 [ext_resource type="Script" path="res://scripts/state_machine/state_debug_label.gd" id="8_vnb21"]
+[ext_resource type="AudioStream" uid="uid://ce7qu0rfpilvd" path="res://assets/sounds/sfx/sfx_movement_footstepsloop4_slow.wav" id="9_85c4y"]
 [ext_resource type="Script" path="res://scripts/player/height_debug_label.gd" id="9_ee6ic"]
 [ext_resource type="PackedScene" uid="uid://co50r8ouqttp5" path="res://scenes/weapons/pistol.tscn" id="10_ilyql"]
+[ext_resource type="PackedScene" uid="uid://ewtn15f1rtqa" path="res://scenes/components/health_component.tscn" id="11_bi2tw"]
+[ext_resource type="PackedScene" uid="uid://cpvmilfq8egwi" path="res://scenes/components/healthbar_component.tscn" id="15_fufmg"]
+[ext_resource type="Texture2D" uid="uid://bk70ui2pvb6v4" path="res://assets/sprites/heart.png" id="16_7oncg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ns8m"]
-size = Vector2(9, 14)
+size = Vector2(8, 14)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hc6to"]
 atlas = ExtResource("2_xgsse")
@@ -35,19 +40,19 @@ region = Rect2(0, 64, 16, 16)
 atlas = ExtResource("2_xgsse")
 region = Rect2(16, 64, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_575sj"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qvqly"]
 atlas = ExtResource("2_xgsse")
 region = Rect2(0, 16, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2ft33"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_edlmh"]
 atlas = ExtResource("2_xgsse")
 region = Rect2(16, 16, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ox7rr"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_xny46"]
 atlas = ExtResource("2_xgsse")
 region = Rect2(32, 16, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qr1le"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_11itj"]
 atlas = ExtResource("2_xgsse")
 region = Rect2(48, 16, 16, 16)
 
@@ -85,16 +90,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_575sj")
+"texture": SubResource("AtlasTexture_qvqly")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2ft33")
+"texture": SubResource("AtlasTexture_edlmh")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ox7rr")
+"texture": SubResource("AtlasTexture_xny46")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qr1le")
+"texture": SubResource("AtlasTexture_11itj")
 }],
 "loop": true,
 "name": &"move",
@@ -108,12 +113,12 @@ collision_mask = 3
 script = ExtResource("1_0dg22")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 1)
+position = Vector2(-1, 1)
 shape = SubResource("RectangleShape2D_3ns8m")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_uf0c5")
-animation = &"idle"
+animation = &"move"
 autoplay = "idle"
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
@@ -127,6 +132,7 @@ move_state = NodePath("../Move")
 jump_state = NodePath("../Jump")
 early_fall_gravity = 1.7
 animation_name = "fall"
+sound_effect_resource = ExtResource("7_6h7hf")
 
 [node name="CoyoteTimer" type="Timer" parent="StateMachine/Fall"]
 wait_time = 0.15
@@ -146,6 +152,7 @@ idle_state = NodePath("../Idle")
 move_state = NodePath("../Move")
 jump_height = 150.0
 animation_name = "jump"
+sound_effect_resource = ExtResource("7_6h7hf")
 
 [node name="Move" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "jump_state", "fall_state")]
 script = ExtResource("6_0o506")
@@ -154,9 +161,18 @@ jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
 move_speed = 100
 animation_name = "move"
+sound_effect_resource = ExtResource("9_85c4y")
 
 [node name="MovementComponent" type="Node2D" parent="."]
 script = ExtResource("7_bf3iw")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("healthbar") instance=ExtResource("11_bi2tw")]
+MAX_HEALTH = 5.0
+healthbar = NodePath("../HealthbarComponent")
+
+[node name="Weapon" parent="." node_paths=PackedStringArray("ammo_component") instance=ExtResource("10_ilyql")]
+position = Vector2(1, 2)
+ammo_component = NodePath("AmmoComponent")
 
 [node name="StateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 offset_left = -45.0
@@ -176,6 +192,8 @@ text = "Height:"
 script = ExtResource("9_ee6ic")
 player = NodePath("..")
 
-[node name="Weapon" parent="." node_paths=PackedStringArray("ammo_component") instance=ExtResource("10_ilyql")]
-position = Vector2(1, 2)
-ammo_component = NodePath("AmmoComponent")
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="HealthbarComponent" parent="." instance=ExtResource("15_fufmg")]
+position = Vector2(-1, 1)
+texture = ExtResource("16_7oncg")
