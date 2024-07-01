@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bedjiti0h4ewa"]
+[gd_scene load_steps=29 format=3 uid="uid://bedjiti0h4ewa"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_0dg22"]
 [ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="2_uxpfn"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://ce7qu0rfpilvd" path="res://assets/sounds/sfx/sfx_movement_footstepsloop4_slow.wav" id="9_85c4y"]
 [ext_resource type="Script" path="res://scripts/player/height_debug_label.gd" id="9_ee6ic"]
 [ext_resource type="PackedScene" uid="uid://co50r8ouqttp5" path="res://scenes/weapons/pistol.tscn" id="10_ilyql"]
+[ext_resource type="Script" path="res://scripts/state_machine/player_states/hurt.gd" id="10_lv52j"]
 [ext_resource type="PackedScene" uid="uid://ewtn15f1rtqa" path="res://scenes/components/health_component.tscn" id="11_bi2tw"]
 [ext_resource type="PackedScene" uid="uid://cpvmilfq8egwi" path="res://scenes/components/healthbar_component.tscn" id="15_fufmg"]
 [ext_resource type="Texture2D" uid="uid://bk70ui2pvb6v4" path="res://assets/sprites/heart.png" id="16_7oncg"]
@@ -163,6 +164,11 @@ move_speed = 100
 animation_name = "move"
 sound_effect_resource = ExtResource("9_85c4y")
 
+[node name="Hurt" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall_state")]
+script = ExtResource("10_lv52j")
+fall_state = NodePath("../Fall")
+knockback_force = Vector2(1000, 400)
+
 [node name="MovementComponent" type="Node2D" parent="."]
 script = ExtResource("7_bf3iw")
 
@@ -195,5 +201,4 @@ player = NodePath("..")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [node name="HealthbarComponent" parent="." instance=ExtResource("15_fufmg")]
-position = Vector2(-1, 1)
 texture = ExtResource("16_7oncg")

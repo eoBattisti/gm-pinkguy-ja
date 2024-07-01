@@ -5,6 +5,8 @@ class_name Enemy
 @onready var movement_component: Node = $MovementComponent
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
+var direction = 1
+
 func _ready() -> void:
 	state_machine.init(self, animated_sprite_2d, null, movement_component)
 

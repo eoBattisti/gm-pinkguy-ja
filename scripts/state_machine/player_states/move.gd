@@ -21,7 +21,6 @@ func process_physics(delta: float) -> State:
 
 	parent.velocity.y += gravity * delta
 	var movement = movement_component.get_move_direction() * move_speed
-	
 	if movement == 0:
 		return idle_state
 

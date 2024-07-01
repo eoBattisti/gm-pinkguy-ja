@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://eq7h15pphq68"]
+[gd_scene load_steps=18 format=3 uid="uid://eq7h15pphq68"]
 
 [ext_resource type="Script" path="res://scripts/enemy/enemy.gd" id="1_fcrx7"]
 [ext_resource type="Texture2D" uid="uid://c2x1l7nn0ngtf" path="res://assets/sprites/Enemies.png" id="2_pwek1"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://ewtn15f1rtqa" path="res://scenes/components/health_component.tscn" id="6_0vwjc"]
 [ext_resource type="PackedScene" uid="uid://cpvmilfq8egwi" path="res://scenes/components/healthbar_component.tscn" id="7_i67lo"]
 [ext_resource type="Texture2D" uid="uid://bk70ui2pvb6v4" path="res://assets/sprites/heart.png" id="8_w4oep"]
+[ext_resource type="PackedScene" uid="uid://la4syjv4wvgt" path="res://scenes/components/hitbox_component.tscn" id="9_idd37"]
+[ext_resource type="PackedScene" uid="uid://x7je2f4n8qgi" path="res://scenes/components/damage_component.tscn" id="10_n0mkl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j4dgh"]
 atlas = ExtResource("2_pwek1")
@@ -46,6 +48,9 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xlkfl"]
+size = Vector2(14, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0a31w"]
 size = Vector2(14, 9)
 
 [node name="Spider" type="CharacterBody2D" groups=["enemies"]]
@@ -103,3 +108,13 @@ healthbar = NodePath("../HealthbarComponent")
 
 [node name="HealthbarComponent" parent="." instance=ExtResource("7_i67lo")]
 texture = ExtResource("8_w4oep")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("9_idd37")]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(1, -0.5)
+shape = SubResource("RectangleShape2D_0a31w")
+
+[node name="DamageComponent" parent="." instance=ExtResource("10_n0mkl")]
+DAMAGE = 1

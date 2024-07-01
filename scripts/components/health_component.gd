@@ -8,7 +8,6 @@ var current_health: float
 
 func _ready() -> void:
 	current_health = MAX_HEALTH
-	print(healthbar)
 	healthbar.init(MAX_HEALTH)
 
 func damage(damage: int) -> void:
