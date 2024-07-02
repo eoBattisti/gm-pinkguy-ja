@@ -1,5 +1,6 @@
 extends Node
 
+@export var can_fly: bool = false
 @export var raycast_right: RayCast2D
 @export var raycast_down_right: RayCast2D
 @export var raycast_left: RayCast2D
