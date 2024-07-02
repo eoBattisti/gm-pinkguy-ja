@@ -16,5 +16,8 @@ func damage(damage: int) -> void:
 	healthbar.handle_damage(damage)
 
 	if current_health <= 0:
-		var parent: CharacterBody2D = get_parent()
-		parent.queue_free()
+		var parent = get_parent()
+		if parent is Player:
+			parent.die()
+		else:
+			parent.queue_free()

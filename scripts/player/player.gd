@@ -28,3 +28,6 @@ func _process(delta: float) -> void:
 func _on_player_hurt(counter_direction: int) -> void:
 	hurt_state.counter_direction = counter_direction
 	state_machine.change_state(hurt_state)
+
+func die():
+	get_tree().change_scene_to_file("res://scenes/menus/game_over_menu.tscn")

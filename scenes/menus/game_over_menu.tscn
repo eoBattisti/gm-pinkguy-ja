@@ -1,0 +1,105 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm8j2wghfij7l"]
+
+[ext_resource type="Theme" uid="uid://boewen5utu4mk" path="res://assets/themes/default_theme.tres" id="1_43fly"]
+[ext_resource type="Script" path="res://scripts/menu/game_over_menu.gd" id="2_wcpt7"]
+
+[node name="GameOverMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_43fly")
+script = ExtResource("2_wcpt7")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+text = "Game OVer
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatusVBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MaxHeightHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatusVBox"]
+layout_mode = 2
+
+[node name="MaxHeightLabel" type="Label" parent="MarginContainer/VBoxContainer/StatusVBox/MaxHeightHBox"]
+layout_mode = 2
+text = "MAX HEIGHT:"
+
+[node name="MaxHeightValue" type="Label" parent="MarginContainer/VBoxContainer/StatusVBox/MaxHeightHBox"]
+layout_mode = 2
+
+[node name="HeightHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatusVBox"]
+layout_mode = 2
+
+[node name="HeightLabel" type="Label" parent="MarginContainer/VBoxContainer/StatusVBox/HeightHBox"]
+layout_mode = 2
+text = "HEIGHT:"
+
+[node name="HeightValue" type="Label" parent="MarginContainer/VBoxContainer/StatusVBox/HeightHBox"]
+layout_mode = 2
+
+[node name="ScoreHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer/StatusVBox"]
+layout_mode = 2
+
+[node name="ScoreLabel" type="Label" parent="MarginContainer/VBoxContainer/StatusVBox/ScoreHBox"]
+layout_mode = 2
+text = "Score:"
+
+[node name="ScoreValue" type="Label" parent="MarginContainer/VBoxContainer/StatusVBox/ScoreHBox"]
+layout_mode = 2
+
+[node name="ButtonsVBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="RestartButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonsVBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_top = NodePath("../ExitButton")
+focus_next = NodePath("../ExitButton")
+focus_previous = NodePath("../ExitButton")
+text = "Restart"
+
+[node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonsVBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_bottom = NodePath("../RestartButton")
+focus_next = NodePath("../RestartButton")
+text = "menu"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsVBox/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsVBox/ExitButton" to="." method="_on_exit_button_pressed"]

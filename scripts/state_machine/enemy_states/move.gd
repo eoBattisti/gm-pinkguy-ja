@@ -20,8 +20,10 @@ func process_physics(delta: float) -> State:
 	if !movement_component.can_fly:
 		parent.velocity.y += gravity * delta
 
-	if movement_component._detected_player_right() or movement_component._detected_player_left():
-		parent.direction *= -1
+	if movement_component._detected_player_right():
+		parent.direction = 1
+	if movement_component._detected_player_left():
+		parent.direction = -1
 	
 	if !movement_component.can_fly and movement_component._detected_enemy_fall():
 		parent.direction *= -1

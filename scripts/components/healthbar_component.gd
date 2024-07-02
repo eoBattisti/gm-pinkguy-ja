@@ -23,4 +23,5 @@ func init(max_health: int) -> void:
 func handle_damage(amount: int) -> void:
 	for i in amount:
 		var child = hearts.pop_back() as Sprite2D
-		child.queue_free()
+		if child:
+			child.queue_free()

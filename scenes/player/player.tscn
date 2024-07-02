@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bedjiti0h4ewa"]
+[gd_scene load_steps=31 format=3 uid="uid://bedjiti0h4ewa"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_0dg22"]
 [ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="2_uxpfn"]
@@ -24,6 +24,14 @@ size = Vector2(8, 14)
 [sub_resource type="AtlasTexture" id="AtlasTexture_hc6to"]
 atlas = ExtResource("2_xgsse")
 region = Rect2(16, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oa6lk"]
+atlas = ExtResource("2_xgsse")
+region = Rect2(0, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0eu2"]
+atlas = ExtResource("2_xgsse")
+region = Rect2(16, 96, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sd47s"]
 atlas = ExtResource("2_xgsse")
@@ -65,6 +73,23 @@ animations = [{
 }],
 "loop": true,
 "name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oa6lk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0eu2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oa6lk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0eu2")
+}],
+"loop": false,
+"name": &"hurt",
 "speed": 5.0
 }, {
 "frames": [{
@@ -119,7 +144,7 @@ shape = SubResource("RectangleShape2D_3ns8m")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_uf0c5")
-animation = &"move"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
@@ -168,6 +193,7 @@ sound_effect_resource = ExtResource("9_85c4y")
 script = ExtResource("10_lv52j")
 fall_state = NodePath("../Fall")
 knockback_force = Vector2(200, 20)
+animation_name = "hurt"
 
 [node name="MovementComponent" type="Node2D" parent="."]
 script = ExtResource("7_bf3iw")

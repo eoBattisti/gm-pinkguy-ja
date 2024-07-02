@@ -12,6 +12,7 @@ var wait_time: float = 0
 func enter() -> void:
 	wait_time = knockback_wait_time
 	super()
+	await  animations.animation_finished
 
 func exit() -> void:
 	counter_direction = 0
