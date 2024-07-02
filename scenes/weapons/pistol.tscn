@@ -1,14 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://co50r8ouqttp5"]
+[gd_scene load_steps=7 format=3 uid="uid://co50r8ouqttp5"]
 
 [ext_resource type="Script" path="res://scripts/weapons/pistol.gd" id="1_a606n"]
 [ext_resource type="Texture2D" uid="uid://ctjxy6p8gegrn" path="res://assets/sprites/weapon.png" id="2_gkvrk"]
+[ext_resource type="AudioStream" uid="uid://4otqi11538e6" path="res://assets/sounds/sfx/sfx_wpn_noammo2.wav" id="2_qppb0"]
+[ext_resource type="AudioStream" uid="uid://cmpqtwygl0vo4" path="res://assets/sounds/sfx/sfx_weapon_singleshot3.wav" id="3_ckl1m"]
 [ext_resource type="PackedScene" uid="uid://plbukpx4xsy3" path="res://scenes/components/ammo_component.tscn" id="3_hl04c"]
+[ext_resource type="AudioStream" uid="uid://tsr4m7kuf3v0" path="res://assets/sounds/sfx/sfx_sounds_interaction_reload.wav" id="4_qncwg"]
 
 [node name="Pistol" type="Node2D" node_paths=PackedStringArray("ammo_component")]
 script = ExtResource("1_a606n")
 ammo_component = NodePath("AmmoComponent")
+out_of_ammo_sfx = ExtResource("2_qppb0")
+shoot_sfx = ExtResource("3_ckl1m")
+reload_sfx = ExtResource("4_qncwg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_gkvrk")
 
 [node name="AmmoComponent" parent="." instance=ExtResource("3_hl04c")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"sfx"
