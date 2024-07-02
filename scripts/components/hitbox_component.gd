@@ -1,4 +1,5 @@
 extends Area2D
+class_name HitboxComponent
 
 var parent: Enemy
 var damage_component: DamageComponent

@@ -1,0 +1,121 @@
+[gd_scene load_steps=18 format=3 uid="uid://cdw2o26uyfje1"]
+
+[ext_resource type="Texture2D" uid="uid://c2x1l7nn0ngtf" path="res://assets/sprites/Enemies.png" id="1_4px46"]
+[ext_resource type="Script" path="res://scripts/enemy/enemy.gd" id="1_8soxm"]
+[ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="2_vrven"]
+[ext_resource type="Script" path="res://scripts/state_machine/enemy_states/move.gd" id="3_106xb"]
+[ext_resource type="Script" path="res://scripts/components/enemy/movement_component.gd" id="4_mcvp3"]
+[ext_resource type="Script" path="res://scripts/components/health_component.gd" id="5_xstcr"]
+[ext_resource type="Script" path="res://scripts/components/healthbar_component.gd" id="6_uy8b3"]
+[ext_resource type="Texture2D" uid="uid://bk70ui2pvb6v4" path="res://assets/sprites/heart.png" id="7_grv0b"]
+[ext_resource type="Script" path="res://scripts/components/hitbox_component.gd" id="8_w4l4v"]
+[ext_resource type="Script" path="res://scripts/components/damage_component.gd" id="9_1epc6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i840k"]
+atlas = ExtResource("1_4px46")
+region = Rect2(48, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kd82i"]
+atlas = ExtResource("1_4px46")
+region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p3y2b"]
+atlas = ExtResource("1_4px46")
+region = Rect2(80, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_35d07"]
+atlas = ExtResource("1_4px46")
+region = Rect2(96, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n7ogp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i840k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kd82i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p3y2b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_35d07")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_popbn"]
+size = Vector2(12, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_km1x6"]
+size = Vector2(12, 11)
+
+[node name="Chicken" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource("1_8soxm")
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(6, 0)
+target_position = Vector2(27, 0)
+collision_mask = 2
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(-6, 0)
+target_position = Vector2(-27, 0)
+collision_mask = 2
+
+[node name="RayCastDownRight" type="RayCast2D" parent="."]
+position = Vector2(6, 3)
+target_position = Vector2(0, 9)
+
+[node name="RayCastDownLeft" type="RayCast2D" parent="."]
+position = Vector2(-6, 3)
+target_position = Vector2(0, 9)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_n7ogp")
+animation = &"move"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_popbn")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_vrven")
+initial_state = NodePath("EnemyMoveState")
+
+[node name="EnemyMoveState" type="Node" parent="StateMachine"]
+script = ExtResource("3_106xb")
+animation_name = "move"
+
+[node name="MovementComponent" type="Node" parent="." node_paths=PackedStringArray("raycast_right", "raycast_down_right", "raycast_left", "raycast_down_left")]
+script = ExtResource("4_mcvp3")
+raycast_right = NodePath("../RayCastRight")
+raycast_down_right = NodePath("../RayCastDownRight")
+raycast_left = NodePath("../RayCastLeft")
+raycast_down_left = NodePath("../RayCastDownLeft")
+
+[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("healthbar")]
+script = ExtResource("5_xstcr")
+MAX_HEALTH = 3.0
+healthbar = NodePath("../HealthbarComponent")
+
+[node name="HealthbarComponent" type="Node2D" parent="."]
+script = ExtResource("6_uy8b3")
+texture = ExtResource("7_grv0b")
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_mask = 3
+script = ExtResource("8_w4l4v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_km1x6")
+
+[node name="DamageComponent" type="Node2D" parent="."]
+script = ExtResource("9_1epc6")
+DAMAGE = 1

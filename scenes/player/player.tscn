@@ -167,7 +167,7 @@ sound_effect_resource = ExtResource("9_85c4y")
 [node name="Hurt" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall_state")]
 script = ExtResource("10_lv52j")
 fall_state = NodePath("../Fall")
-knockback_force = Vector2(1000, 400)
+knockback_force = Vector2(200, 20)
 
 [node name="MovementComponent" type="Node2D" parent="."]
 script = ExtResource("7_bf3iw")

@@ -9,7 +9,7 @@ var direction = 1
 
 func _ready() -> void:
 	state_machine.init(self, animated_sprite_2d, null, movement_component)
-
+	
 func _unhandled_input(event: InputEvent) -> void:
 	state_machine.process_input(event)
 
