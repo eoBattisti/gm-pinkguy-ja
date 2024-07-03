@@ -97,7 +97,7 @@ raycast_down_left = NodePath("../RayCastDownLeft")
 
 [node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("healthbar")]
 script = ExtResource("5_xstcr")
-MAX_HEALTH = 3.0
+MAX_HEALTH = 1.0
 healthbar = NodePath("../HealthbarComponent")
 
 [node name="HealthbarComponent" type="Node2D" parent="."]

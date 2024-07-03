@@ -103,7 +103,7 @@ raycast_left = NodePath("../RayCastLeft")
 raycast_down_left = NodePath("../RayCastDownLeft")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("healthbar") instance=ExtResource("6_0vwjc")]
-MAX_HEALTH = 3.0
+MAX_HEALTH = 2.0
 healthbar = NodePath("../HealthbarComponent")
 
 [node name="HealthbarComponent" parent="." instance=ExtResource("7_i67lo")]
@@ -117,4 +117,4 @@ position = Vector2(1, -0.5)
 shape = SubResource("RectangleShape2D_0a31w")
 
 [node name="DamageComponent" parent="." instance=ExtResource("10_n0mkl")]
-DAMAGE = 1
+DAMAGE = 2

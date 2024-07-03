@@ -106,7 +106,7 @@ texture = ExtResource("7_gyyw2")
 
 [node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("healthbar")]
 script = ExtResource("8_8n6gn")
-MAX_HEALTH = 4.0
+MAX_HEALTH = 2.0
 healthbar = NodePath("../HealthbarComponent")
 
 [node name="HitboxComponent" type="Area2D" parent="."]
