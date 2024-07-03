@@ -16,8 +16,8 @@ func _ready() -> void:
 	MusicManager.set_new_stream(MusicManager.MusicType.INGAME)
 
 func _process(_delta: float) -> void:
-	#if player:
-		#GameManager.set_height(player.global_position.y)
+	if player:
+		GameManager.set_height(player.global_position.y)
 	pass
 
 func _unhandled_input(event: InputEvent) -> void:

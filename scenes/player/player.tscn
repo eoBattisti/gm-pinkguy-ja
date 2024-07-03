@@ -144,7 +144,7 @@ shape = SubResource("RectangleShape2D_3ns8m")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_uf0c5")
-animation = &"idle"
+animation = &"move"
 autoplay = "idle"
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]

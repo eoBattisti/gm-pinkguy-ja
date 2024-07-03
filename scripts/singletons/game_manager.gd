@@ -5,8 +5,7 @@ var height: int = 0
 var max_height: int = 0
 
 func start_game() -> void:
-	#Engine.time_scale = 1
-	# Stops the menu scene
+	Engine.time_scale = 1
 	pass
 
 func add_score() -> void:
@@ -14,3 +13,5 @@ func add_score() -> void:
 
 func set_height(value: int) -> void:
 	height = value * -1
+	if height > max_height:
+		max_height = height
