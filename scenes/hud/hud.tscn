@@ -31,17 +31,21 @@ alignment = 1
 
 [node name="HeightLabel" type="Label" parent="Control/MarginContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "H:"
 
 [node name="ScoreLabel" type="Label" parent="Control/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
 text = "S:"
 
 [node name="MaxHeightLabel" type="Label" parent="Control/MarginContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "MH:"
 
 [node name="AmmoLabel" type="Label" parent="Control/MarginContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "A: "
