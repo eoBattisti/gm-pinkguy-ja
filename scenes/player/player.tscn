@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bedjiti0h4ewa"]
+[gd_scene load_steps=29 format=3 uid="uid://bedjiti0h4ewa"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_0dg22"]
 [ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="2_uxpfn"]
@@ -9,9 +9,7 @@
 [ext_resource type="Script" path="res://scripts/state_machine/player_states/move.gd" id="6_0o506"]
 [ext_resource type="AudioStream" uid="uid://6le1yoaoobey" path="res://assets/sounds/sfx/sfx_movement_jump9.wav" id="7_6h7hf"]
 [ext_resource type="Script" path="res://scripts/components/player/movement_component.gd" id="7_bf3iw"]
-[ext_resource type="Script" path="res://scripts/state_machine/state_debug_label.gd" id="8_vnb21"]
 [ext_resource type="AudioStream" uid="uid://ce7qu0rfpilvd" path="res://assets/sounds/sfx/sfx_movement_footstepsloop4_slow.wav" id="9_85c4y"]
-[ext_resource type="Script" path="res://scripts/player/height_debug_label.gd" id="9_ee6ic"]
 [ext_resource type="PackedScene" uid="uid://co50r8ouqttp5" path="res://scenes/weapons/pistol.tscn" id="10_ilyql"]
 [ext_resource type="Script" path="res://scripts/state_machine/player_states/hurt.gd" id="10_lv52j"]
 [ext_resource type="PackedScene" uid="uid://ewtn15f1rtqa" path="res://scenes/components/health_component.tscn" id="11_bi2tw"]
@@ -205,24 +203,6 @@ healthbar = NodePath("../HealthbarComponent")
 [node name="Weapon" parent="." node_paths=PackedStringArray("ammo_component") instance=ExtResource("10_ilyql")]
 position = Vector2(1, 2)
 ammo_component = NodePath("AmmoComponent")
-
-[node name="StateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
-offset_left = -45.0
-offset_top = -46.0
-offset_right = 82.0
-offset_bottom = -23.0
-text = "State:"
-script = ExtResource("8_vnb21")
-state_machine = NodePath("../StateMachine")
-
-[node name="HeightDebugLabel" type="Label" parent="." node_paths=PackedStringArray("player")]
-offset_left = -46.0
-offset_top = -65.0
-offset_right = 81.0
-offset_bottom = -42.0
-text = "Height:"
-script = ExtResource("9_ee6ic")
-player = NodePath("..")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 

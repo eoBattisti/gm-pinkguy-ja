@@ -7,7 +7,7 @@ class_name HealthbarComponent
 var hearts: Array[Sprite2D]
 
 func init(max_health: int) -> void:
-	global_position.y = get_parent().position.y - 10
+	global_position.y = get_parent().position.y - 14
 	global_position.x -= (spacing_to_dd * max_health) / 2
 	var spacing = 0
 	for i in max_health:
