@@ -2,9 +2,10 @@ extends Node2D
 
 @export var in_game_music: AudioStream
 
-@onready var pause_menu: Control = %PauseMenu
 @onready var player: Player = $Player
 @onready var hud: CanvasLayer = $HUD
+@onready var pause_menu: CanvasLayer = $Player/Camera2D/PauseMenu
+@onready var viewport_size = get_viewport_rect().size
 
 signal player_died
 
@@ -26,11 +27,13 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func pause_game() -> void:
 	if paused:
+		get_tree().paused = false
 		pause_menu.hide()
 		hud.show()
 		MusicManager.set_new_stream(MusicManager.MusicType.INGAME)
 		Engine.time_scale = 1
 	else:
+		get_tree().paused = true
 		hud.hide()
 		pause_menu.show()
 		MusicManager.set_new_stream(MusicManager.MusicType.MENU)

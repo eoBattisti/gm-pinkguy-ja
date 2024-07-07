@@ -1,7 +1,8 @@
-extends Control
+extends CanvasLayer
 
 @onready var game = get_parent().get_parent().get_parent()
-@onready var resume_button: Button = $MarginContainer/VBoxContainer/ButtonVBox/ResumeButton
+@onready var resume_button: Button = $Control/MarginContainer/VBoxContainer/ButtonVBox/ResumeButton
+
 
 func _on_resume_button_pressed() -> void:
 	game.pause_game()
