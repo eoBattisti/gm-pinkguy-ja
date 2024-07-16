@@ -3,7 +3,6 @@ class_name Platform
 
 enum PlatformType { GRASS, RED_SAND, SAND, ICE }
 
-
 @export var movable: bool = false # Determines if a platform can move or not
 @export var offset: Vector2 = Vector2(0, -320)
 @export var duration: float = 5.0
