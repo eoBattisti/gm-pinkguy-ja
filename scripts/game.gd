@@ -10,9 +10,11 @@ extends Node2D
 signal player_died
 
 var paused: bool = false
+var mouse_cursor = load("res://assets/sprites/cross.png")
 
 func _ready() -> void:
 	player_died.connect(_on_player_died)
+	Input.set_custom_mouse_cursor(mouse_cursor, Input.CURSOR_ARROW, Vector2(8, 8))
 	GameManager.start_game()
 	MusicManager.set_new_stream(MusicManager.MusicType.INGAME)
 
@@ -28,12 +30,14 @@ func _unhandled_input(event: InputEvent) -> void:
 func pause_game() -> void:
 	if paused:
 		get_tree().paused = false
+		Input.set_custom_mouse_cursor(mouse_cursor, Input.CURSOR_ARROW, Vector2(8,8))
 		pause_menu.hide()
 		hud.show()
 		MusicManager.set_new_stream(MusicManager.MusicType.INGAME)
 		Engine.time_scale = 1
 	else:
 		get_tree().paused = true
+		Input.set_custom_mouse_cursor(null)
 		hud.hide()
 		pause_menu.show()
 		MusicManager.set_new_stream(MusicManager.MusicType.MENU)
