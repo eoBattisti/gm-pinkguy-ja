@@ -200,9 +200,8 @@ script = ExtResource("7_bf3iw")
 MAX_HEALTH = 5.0
 healthbar = NodePath("../HealthbarComponent")
 
-[node name="Weapon" parent="." node_paths=PackedStringArray("ammo_component") instance=ExtResource("10_ilyql")]
+[node name="Weapon" parent="." instance=ExtResource("10_ilyql")]
 position = Vector2(1, 2)
-ammo_component = NodePath("AmmoComponent")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 

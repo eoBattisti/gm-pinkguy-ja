@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BasePlatformResource" load_steps=2 format=3 uid="uid://ba1my4jt3u178"]
+
+[ext_resource type="Script" path="res://scripts/resources/base_platform_resource.gd" id="1_6yltr"]
+
+[resource]
+resource_name = "BasePlaformResource"
+script = ExtResource("1_6yltr")
+type = 2
+movable = false
+offset = Vector2(0, -320)
+duration = 5.0
+min_spawn_height = 0.0
+max_spawn_height = 0.0

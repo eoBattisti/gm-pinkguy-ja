@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BasePlatformResource" load_steps=2 format=3 uid="uid://cfk35vgtvc7x2"]
+
+[ext_resource type="Script" path="res://scripts/resources/base_platform_resource.gd" id="1_olfby"]
+
+[resource]
+script = ExtResource("1_olfby")
+type = 3
+movable = true
+offset = Vector2(0, -320)
+duration = 5.0
+min_spawn_height = 0.0
+max_spawn_height = 0.0
